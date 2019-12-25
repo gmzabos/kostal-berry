@@ -1,11 +1,13 @@
 # kostal-berry
-Accessing a Kostal Piko inverter via Raspberry Pi
+
+Our Kostal Piko 10.1 inverter is located in the basement, the inverter is not connected to the LAN. Let's hook up the inverter to a Raspberry Pi 3b+ which can easily be connected to our Wi-Fi.
+Use a reverse proxy (eg. NGINX) to redirect specific requests coming from our local network to the Kostal Piko 10.1 inverter, to be able to connect with either WebUI or the query tool provided by Kostal.
 
 ## Prerequisites
 
 ### Hardware
 - Wi-Fi available, SSID with PSK configured
-- Kostal Piko inverter, located in the basement, no cable connection to LAN possible
+- Kostal Piko inverter + username & password ( default: _pvserver_ / _pvwr )
 - 1x network cable to hook up the Raspberry Pi 3b+ link-local to the Kostal Piko inverter
 - Raspberry Pi 3b+
 - 32GB miniSD card for running an OS on Raspberry Pi 3b+
@@ -56,7 +58,7 @@ runcmd:
   - 'systemctl restart avahi-daemon'
 
 #  # Activate WiFi interface
-#  - 'ifup wlan0'
+#   - 'ifup wlan0'
 ```
 - make sure to set your Wi-Fi SSID in `ssid=""`
 - make sure to set your Wi-Fi SSID PSK in `psk=""`
@@ -78,7 +80,7 @@ runcmd:
   - `sudo apt-get install -y nginx`
 - Remove default site in NGINX
   - `sudo unlink /etc/nginx/sites-enabled/default`
-- Create a new config file in NGINX using this template
+- Create a new config file in NGINX using this as a template
   - `cd /etc/nginx/sites-available/`
   - `sudo vi reverse-proxy`
 ```
@@ -93,7 +95,7 @@ runcmd:
     }
 }
 ```
-  - if necessary edit the `proxy_pass http://` with the link-local IP of the inverter (see Step 2)
+- Edit the `proxy_pass http://` with the link-local IP of the inverter (see Step 2)
 - Link the new config file in NGINX 
   - `sudo ln -s /etc/nginx/sites-available/reverse-proxy /etc/nginx/sites-enabled/reverse-proxy`
 - Test the new config file in NGINX
@@ -102,10 +104,8 @@ runcmd:
   - `sudo systemctl restart nginx`
 
 ## Step 4 - Login via WebUI
-- Login to the WebUI of the Kostal Piko inverter using the combination of
+- Connect to the WebUI of the Kostal Piko inverter using the correct URL
   - the Raspberry Pi 3b+ IP address (example: `192.168.178.26`)
   - the port configured in the `listen` directive of the reverse proxy (example: `8888`)
-  - combined example: `http://192.168.178.26:8888/`
-
-
-
+  - in this combined example: `http://192.168.178.26:8888/`
+- Login using the correct credentials (see Hardware)
