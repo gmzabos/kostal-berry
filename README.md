@@ -81,7 +81,7 @@ runcmd:
 - Create a new config file in NGINX using this template
   - `cd /etc/nginx/sites-available/`
   - `sudo vi reverse-proxy`
-  ```
+```
   server {
     listen 8888;
 
