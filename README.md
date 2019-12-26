@@ -7,7 +7,7 @@ Use a reverse proxy (eg. NGINX) to redirect specific requests coming from our lo
 
 ### Hardware
 - Wi-Fi available, SSID with PSK configured
-- Kostal Piko inverter + username & password ( default: _pvserver_ / _pvwr )
+- Kostal Piko inverter + username & password ( default: _pvserver_ / _pvwr_ )
 - 1x network cable to hook up the Raspberry Pi 3b+ link-local to the Kostal Piko inverter
 - Raspberry Pi 3b+
 - 32GB miniSD card for running an OS on Raspberry Pi 3b+
