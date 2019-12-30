@@ -73,7 +73,7 @@ runcmd:
 - find out the IP address of the Kostal Piko inverter in the menu of the inverter (example: `169.254.109.206/16`)
 - ping the IP address (example: `ping 169.254.109.206`). If you get an answer, you can reach the inverter and you're ready to go.
 
-## Step 3 - Setup a reverse proxy
+## Step 3 - Setup a reverse proxy as a OS native service
 - Install NGINX
   - `sudo apt-get autoclean`
   - `sudo apt-get update`
@@ -109,3 +109,7 @@ runcmd:
   - the port configured in the `listen` directive of the reverse proxy (example: `8888`)
   - in this combined example: `http://192.168.178.26:8888/`
 - Login using the correct credentials (see Hardware)
+
+## (Optional) Step 3 - Setup a reverse proxy as a docker container
+- instead of using the OS native nginx service described in Step 3, you can also setup nginx as a docker container
+- https://github.com/gmzabos/kostal-berry/tree/master/docker-nginx
